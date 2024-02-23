@@ -1,5 +1,9 @@
 package me.mrCookieSlime.QuickSell.utils.reflection;
 
+import me.mrCookieSlime.QuickSell.utils.ListUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -7,11 +11,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-
-import me.mrCookieSlime.QuickSell.utils.ListUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class ReflectionUtils {
 
@@ -321,6 +320,7 @@ public class ReflectionUtils {
      */
     public static String getVersion() {
         if (currentVersion == null) currentVersion = Bukkit.getServer().getClass().getPackage().getName().substring(Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1);
+        Bukkit.getConsoleSender().sendMessage(currentVersion);
         return currentVersion;
     }
 

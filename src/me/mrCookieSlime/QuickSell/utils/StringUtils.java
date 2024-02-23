@@ -1,10 +1,10 @@
 package me.mrCookieSlime.QuickSell.utils;
 
-import java.lang.reflect.Method;
-
 import me.mrCookieSlime.QuickSell.utils.reflection.PackageName;
 import me.mrCookieSlime.QuickSell.utils.reflection.ReflectionUtils;
 import org.bukkit.inventory.ItemStack;
+
+import java.lang.reflect.Method;
 public class StringUtils {
 
     private static Method copy, getName, toString;
@@ -14,7 +14,7 @@ public class StringUtils {
             copy = ReflectionUtils.getClass(PackageName.OBC, "inventory.CraftItemStack").getMethod("asNMSCopy", ItemStack.class);
             getName = ReflectionUtils.getMethod(ReflectionUtils.getClass(PackageName.NMS, "ItemStack"), "getName");
 
-            if (ReflectionUtils.isVersion("v1_13_", "v1_14_", "v1_15_", "v1_16_", "v1_17_", "v1_18_", "v1_19_")) {
+            if (ReflectionUtils.isVersion("v1_13_", "v1_14_", "v1_15_", "v1_16_", "v1_17_", "v1_18_", "v1_19_", "v1_20_", "v1_21_")) {
                 toString = ReflectionUtils.getMethod(ReflectionUtils.getClass(PackageName.NMS, "IChatBaseComponent"), "getString");
             }
         }
