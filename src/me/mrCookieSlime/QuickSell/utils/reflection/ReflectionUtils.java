@@ -16,7 +16,7 @@ public class ReflectionUtils {
 
     private static Method handle_player, handle_world, handle_entity, handle_animals, sendPacket;
     private static Field player_connection;
-    private static final Map<Class<?>, Class<?>> conversion = new HashMap<Class<?>, Class<?>>();
+    private static final Map<Class<?>, Class<?>> conversion = new HashMap<>();
     private static String currentVersion;
 
     static {
@@ -232,7 +232,7 @@ public class ReflectionUtils {
      * @return      The Class in that Package
      */
     public static Class<?> getClass(PackageName path, String name) throws Exception {
-        return Class.forName(new StringBuilder().append(path.toPackage()).append(getVersion()).append(".").append(name).toString());
+        return Class.forName(path.toPackage() + getVersion() + "." + name);
     }
 
     /**
@@ -242,11 +242,10 @@ public class ReflectionUtils {
      * @param  names The Names of the Classes you are looking for
      * @return      The Class in that Package
      */
-    public static Class<?> tryClass(PackageName path, String... names) throws Exception {
+    public static Class<?> tryClass(PackageName path, String... names) {
         for (String name: names) {
             try {
-                Class<?> c = Class.forName(new StringBuilder().append(path.toPackage()).append(getVersion()).append(".").append(name).toString());
-                return c;
+                return Class.forName(path.toPackage() + getVersion() + "." + name);
             } catch(ClassNotFoundException x) {
             }
         }
@@ -265,7 +264,7 @@ public class ReflectionUtils {
         for (String name: names) {
             try {
                 Field f = c.getDeclaredField(name);
-                if (f != null) return f;
+                return f;
             } catch(NoSuchFieldException x) {
             }
         }
@@ -280,7 +279,7 @@ public class ReflectionUtils {
      * @param  value The Value for that Field
      * @param  names The Names of the fields you are looking for
      */
-    public static void trySetField(Object object, Object value, String... names) throws Exception {
+    public static void trySetField(Object object, Object value, String... names) {
         Class<?> c = object.getClass();
         for (String name: names) {
             try {
@@ -301,7 +300,7 @@ public class ReflectionUtils {
      * @param  params The Parameters of your Method
      * @return      The field in that class
      */
-    public static Method tryMethod(Class<?> c, String[] names, Class<?>... params) throws Exception {
+    public static Method tryMethod(Class<?> c, String[] names, Class<?>... params) {
         for (String name: names) {
             try {
                 Method m = getMethod(c, name, params);
